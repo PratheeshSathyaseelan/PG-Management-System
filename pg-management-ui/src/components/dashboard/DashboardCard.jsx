@@ -1,18 +1,32 @@
-function DashboardCard({ title, value }) {
+import { Card, CardContent, Typography, Box } from "@mui/material";
+
+function DashboardCard({ title, value, icon }) {
   return (
-    <div
-      style={{
-        background: "white",
-        padding: "20px",
-        borderRadius: "12px",
-        width: "220px",
-        boxShadow: "0 4px 10px rgba(0,0,0,.08)",
+    <Card
+      elevation={3}
+      sx={{
+        borderRadius: 3,
+        height: 140,
       }}
     >
-      <h4>{title}</h4>
+      <CardContent>
+        <Box display="flex" justifyContent="space-between">
+          <Typography color="text.secondary">
+            {title}
+          </Typography>
 
-      <h2>{value}</h2>
-    </div>
+          {icon}
+        </Box>
+
+        <Typography
+          variant="h4"
+          fontWeight="bold"
+          mt={3}
+        >
+          {value}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 }
 

@@ -4,15 +4,13 @@ import Navbar from "../components/layout/Navbar";
 
 function MainLayout({ children }) {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar />
 
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, ml: "260px" }}>
         <Navbar />
 
-        <Toolbar />
-
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3, mt: 8 }}>
           {children}
         </Box>
       </Box>

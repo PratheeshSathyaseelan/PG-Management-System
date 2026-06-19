@@ -1,69 +1,57 @@
-import {
-  Dashboard,
-  Apartment,
-  Groups,
-  Hotel,
-  Payments,
-  Assessment,
-  Settings,
-} from "@mui/icons-material";
-
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-
-const drawerWidth = 240;
-
-const menuItems = [
-  { text: "Dashboard", icon: <Dashboard /> },
-  { text: "My PGs", icon: <Apartment /> },
-  { text: "Guests", icon: <Groups /> },
-  { text: "Rooms", icon: <Hotel /> },
-  { text: "Payments", icon: <Payments /> },
-  { text: "Reports", icon: <Assessment /> },
-  { text: "Settings", icon: <Settings /> },
-];
+import "./Sidebar.css";
+import menuItems from "../../data/menuItems";
+import { FiLogOut } from "react-icons/fi";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <Drawer
-      variant="permanent"
-      sx={{
-        width: drawerWidth,
-        "& .MuiDrawer-paper": {
-          width: drawerWidth,
-          background: "#1E293B",
-          color: "white",
-        },
-      }}
-    >
-      <Toolbar>
-        <Typography variant="h6" fontWeight="bold">
-          PG Manager
-        </Typography>
-      </Toolbar>
+    <div className="sidebar">
+      <div className="logo">
+        <h2>🏠 PG Manager</h2>
+        <p>Property Management</p>
+      </div>
 
-      <List>
-        {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon sx={{ color: "white" }}>
-                {item.icon}
-              </ListItemIcon>
+      <div className="menu">
+        {menuItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <div
+              key={item.title}
+              className={`menu-item ${isActive(item.path) ? "active" : ""}`}
+              onClick={() => handleNavigation(item.path)}
+            >
+              <Icon size={20} />
+              {item.title}
+            </div>
+          );
+        })}
+      </div>
 
-              <ListItemText primary={item.text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Drawer>
+      <div className="bottom">
+        <h4>Admin User</h4>
+        <p>Owner</p>
+        <br />
+        <div className="menu-item" onClick={handleLogout}>
+          <FiLogOut />
+          Logout
+        </div>
+      </div>
+    </div>
   );
 }
 
