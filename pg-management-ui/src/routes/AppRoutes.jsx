@@ -9,6 +9,7 @@ import RoomList from "../pages/room/RoomList";
 import PaymentList from "../pages/payment/PaymentList";
 import Reports from "../pages/Reports";
 import Settings from "../pages/Settings";
+import GlideTest from "../pages/GlideTest";
 
 function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ function AppRoutes() {
         <Route path="/payments" element={<PaymentList />} />
         <Route path="/reports" element={<Reports />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/test-glide" element={<GlideTest />} />
       </Routes>
     </BrowserRouter>
   );
